@@ -1,0 +1,105 @@
+/* VitalsSection.css */
+
+.vitals-section {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.vitals-section h4 {
+  font-size: 1.2em;
+  color: #4CAF50;
+  margin-bottom: 15px;
+}
+
+.vitals-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.vitals-display p {
+  font-size: 1em;
+  color: #666;
+  margin: 0;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.vitals-input {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.vitals-input label {
+  display: flex;
+  flex-direction: column;
+  font-size: 1em;
+  color: #333;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 6px;
+  background: #fff;
+  width: 100%;
+}
+
+.input-wrapper input {
+  flex: 1;
+  border: none;
+  padding: 6px;
+  font-size: 1em;
+  outline: none;
+}
+
+.unit {
+  font-size: 0.9em;
+  color: #333;
+  padding-left: 5px;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .vitals-section {
+      padding: 10px;
+  }
+
+  .vitals-display,
+  .vitals-input {
+      grid-template-columns: 1fr;
+  }
+
+  .vitals-input input {
+      padding: 6px;
+  }
+
+  .input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+  }
+
+  .input-wrapper input {
+      flex: 1;
+      padding: 6px;
+      font-size: 1em;
+  }
+
+  .unit {
+      font-size: 0.9em;
+      color: #666;
+  }
+}

@@ -1,0 +1,89 @@
+/* MedicalHistory.css */
+
+.medical-section {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .medical-section h4 {
+    font-size: 1.2em;
+    color: #4CAF50;
+    margin-bottom: 15px;
+  }
+  
+  .medical-section h5 {
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .medical-section p {
+    font-size: 1em;
+    color: #666;
+    margin: 0;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .section-entry {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+  
+  .medical-section ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  
+  .medical-section li {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  .medical-section textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: 'Arial', sans-serif;
+    font-size: 1em;
+    margin-top: 10px;
+    resize: vertical;
+  }
+  
+  .medical-section textarea::placeholder {
+    color: #999;
+  }
+  
+  .medical-section input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-top: 10px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .medical-section {
+      padding: 10px;
+    }
+  
+    .medical-section textarea {
+      height: 80px;
+    }
+  
+    .medical-section input[type="text"] {
+      padding: 6px;
+    }
+  }

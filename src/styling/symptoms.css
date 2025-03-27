@@ -1,0 +1,127 @@
+/* SymptomsSection.css */
+
+.symptoms-section {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .symptoms-section h4 {
+    font-size: 1.2em;
+    color: #4CAF50;
+    margin-bottom: 15px;
+  }
+  
+  .symptoms-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .symptoms-display p {
+    background-color: #fff;
+    padding: 8px 12px;
+    border-radius: 16px;
+    border: 1px solid #ddd;
+    font-size: 0.9em;
+    color: #333;
+    margin: 0;
+  }
+  
+  .symptoms-input {
+    position: relative;
+    margin-top: 15px;
+  }
+  
+  .symptoms-input input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+  
+  .suggestions-dropdown {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .suggestions-dropdown li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9em;
+  }
+  
+  .suggestions-dropdown li:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .selected-symptoms {
+    margin-top: 15px;
+  }
+  
+  .selected-symptoms h5 {
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .selected-symptoms ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .symptom-item {
+    background-color: #e8f5e9;
+    padding: 8px 12px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+  }
+  
+  .remove-btn {
+    background-color: #ffebee;
+    color: #c62828;
+    border: none;
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 0.8em;
+    cursor: pointer;
+  }
+  
+  .remove-btn:hover {
+    background-color: #ffcdd2;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .symptoms-section {
+      padding: 10px;
+    }
+  
+    .symptoms-display p,
+    .symptom-item {
+      padding: 6px 10px;
+      font-size: 0.8em;
+    }
+  }

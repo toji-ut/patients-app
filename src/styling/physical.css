@@ -1,0 +1,99 @@
+/* PhysicalExamination.css */
+
+.physical-exam-section {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .physical-exam-section h4 {
+    font-size: 1.3em;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .exam-section {
+    margin-bottom: 20px;
+  }
+  
+  .exam-section h5 {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .exam-section p {
+    background-color: #fff;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    font-size: 1em;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  .exam-section textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Arial', sans-serif;
+    font-size: 1em;
+    line-height: 1.5;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+  }
+  
+  .exam-section textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  }
+  
+  .exam-section textarea::placeholder {
+    color: #999;
+    font-style: italic;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .physical-exam-section {
+      padding: 15px;
+    }
+  
+    .exam-section {
+      margin-bottom: 15px;
+    }
+  
+    .exam-section h5 {
+      font-size: 1em;
+    }
+  
+    .exam-section p,
+    .exam-section textarea {
+      padding: 10px;
+      font-size: 0.95em;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .physical-exam-section {
+      padding: 12px;
+    }
+  
+    .exam-section {
+      margin-bottom: 12px;
+    }
+  
+    .exam-section p,
+    .exam-section textarea {
+      padding: 8px;
+    }
+  }

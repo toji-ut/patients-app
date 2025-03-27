@@ -1,0 +1,85 @@
+/* DiagnosisSection.css */
+
+.diagnosis-section {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .diagnosis-section h3 {
+    font-size: 1.3em;
+    color: #4CAF50;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .diagnosis-section p {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    font-size: 1em;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    white-space: pre-wrap;
+  }
+  
+  .diagnosis-section textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Arial', sans-serif;
+    font-size: 1em;
+    line-height: 1.6;
+    resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .diagnosis-section textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  }
+  
+  .diagnosis-section textarea::placeholder {
+    color: #999;
+    font-style: italic;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .diagnosis-section {
+      padding: 15px;
+    }
+  
+    .diagnosis-section p,
+    .diagnosis-section textarea {
+      padding: 12px;
+      font-size: 0.95em;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .diagnosis-section {
+      padding: 12px;
+    }
+  
+    .diagnosis-section h3 {
+      font-size: 1.2em;
+    }
+  
+    .diagnosis-section p,
+    .diagnosis-section textarea {
+      padding: 10px;
+    }
+  
+    .diagnosis-section textarea {
+      min-height: 100px;
+    }
+  }
