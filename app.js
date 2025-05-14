@@ -220,8 +220,15 @@ Keep response under 250 words total. Use simple language and empathic tone `;
     }
   });
 
+
 // Static files and catch-all route
 app.use(express.static(path.join(__dirname, 'dist')));
+
+// Redirect root to /login
+app.get('/', (req, res) => {
+  res.redirect('/login');
+});
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });

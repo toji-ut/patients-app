@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import PatientBoard from './pages/PatientBoard';
 import DoctorDashboard from './pages/DoctorDashboard';
@@ -8,6 +8,7 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path="/" element={<Navigate to="/login" />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/patient" element={<PatientBoard />} />
                 <Route path="/doctor" element={<DoctorDashboard />} />
@@ -17,6 +18,3 @@ function App() {
         </BrowserRouter>
     );
 }
-
-export default App;
-
