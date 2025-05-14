@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from "../../assets/SCOPE logo.png"; 
+import logo from '../assets/SCOPE-Logo.png';
 
 function Login() {
     const styles = {

@@ -1,4 +1,4 @@
-import logo from '../assets/SCOPE logo.png';
+import logo from '../assets/SCOPE-Logo.png';
 
 function Header() {
 

@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import PatientBoard from './pages/PatientBoard';
 import DoctorDashboard from './pages/DoctorDashboard';
-import PatientProfile from './PatientDash/PatrientProfile';
 import PatientsList from './pages/PatientsList';
 
 function App() {
