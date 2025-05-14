@@ -37,6 +37,7 @@ router.get('/:id', async (req, res) => {
 
     patient = {
       ...patient,
+      age: calculateAge(patient.dob),
       symptoms: patient.symptoms || [],
       medications: patient.medications || [],
       medicalHistory: patient.medicalHistory || {

@@ -1,13 +1,13 @@
 
 import PatientProfile from "../PatientDash/PatrientProfile";
-import Nav from "../partials/Nav";
+import PatientNav from "../partials/PatientNav"
 import Header from "../partials/Header";
 
 function PatientBoard() {
   return (
     <div>
       <Header></Header>
-      <Nav></Nav>
+      <PatientNav></PatientNav>
       <PatientProfile></PatientProfile>
     </div>
 

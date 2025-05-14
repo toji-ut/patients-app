@@ -70,6 +70,10 @@ function PatientProfile() {
     },
   });
 
+  const [aiMessages, setAiMessages] = useState([]);
+  const [userMessage, setUserMessage] = useState('');
+  const [isAiTyping, setIsAiTyping] = useState(false);
+
   const [expandedRecordId, setExpandedRecordId] = useState(null);
   const [aiSuggestions, setAiSuggestions] = useState('');
   const [isAiPanelOpen, setIsAiPanelOpen] = useState(false);
@@ -90,6 +94,12 @@ function PatientProfile() {
     };
     fetchUserRole();
   }, []);
+
+  useEffect(() => {
+    if (userRole === 'patient' && records.length > 0) {
+      fetchPatientInsights();
+    }
+  }, [userRole, records]);
 
   useEffect(() => {
     const fetchPatientData = async () => {
@@ -137,6 +147,105 @@ function PatientProfile() {
       }
     });
     return response;
+  };
+
+  const fetchPatientInsights = async () => {
+    setIsAiLoading(true);
+    try {
+      const latestRecord = records[records.length - 1] || {};
+      
+      const response = await authFetch('/api/patient-insights', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: patient.name,
+          medications: latestRecord.medications || patient.medications,
+          diagnosis: latestRecord.diagnosis || patient.diagnosis,
+          symptoms: latestRecord.symptoms || patient.symptoms
+        })
+      });
+  
+      const data = await response.json();
+      
+      setAiMessages([
+        {
+          id: 1,
+          sender: 'ai',
+          text: `Hello ${patient.name.split(' ')[0]}, I'm your Health Assistant. Here's what you should know:`
+        },
+        {
+          id: 2,
+          sender: 'ai',
+          text: data.insights
+        }
+      ]);
+      
+    } catch (err) {
+      setAiMessages([
+        {
+          id: 1,
+          sender: 'ai',
+          text: "Welcome! I'm having trouble accessing your records right now. Please try again later or ask me a question."
+        }
+      ]);
+      console.error('AI insights error:', err);
+    } finally {
+      setIsAiLoading(false);
+    }
+  };
+  
+  const handleSendMessage = async () => {
+    if (!userMessage.trim() || isAiTyping) return;
+    
+    // Add user message
+    const newMessage = {
+      id: Date.now(),
+      sender: 'user',
+      text: userMessage
+    };
+    setAiMessages(prev => [...prev, newMessage]);
+    setUserMessage('');
+    setIsAiTyping(true);
+    
+    try {
+      const response = await authFetch('/api/patient-chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: userMessage,
+          context: {
+            name: patient.name,
+            medications: patient.medications,
+            diagnosis: patient.diagnosis,
+            symptoms: patient.symptoms
+          }
+        })
+      });
+  
+      const data = await response.json();
+      
+      setAiMessages(prev => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          sender: 'ai',
+          text: data.response
+        }
+      ]);
+      
+    } catch (err) {
+      setAiMessages(prev => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          sender: 'ai',
+          text: "Sorry, I'm having trouble responding. Please try again."
+        }
+      ]);
+      console.error('AI chat error:', err);
+    } finally {
+      setIsAiTyping(false);
+    }
   };
   
 
@@ -544,6 +653,38 @@ function PatientProfile() {
           )}
         </div>
       )}
+
+{userRole === 'patient' && (
+  <div className="patient-ai-panel">
+    <div className="ai-chat-header">
+      <h3><i className="fas fa-robot"></i> Health Information</h3>
+      <p className="ai-subheader">Based on your medical records</p>
+    </div>
+    
+    <div className="ai-info-messages">
+      {aiMessages.map(msg => (
+        <div key={msg.id} className="info-message">
+          {msg.text.split('\n').map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
+        </div>
+      ))}
+      {isAiLoading && (
+        <div className="loading-indicator">
+          <span>•</span>
+          <span>•</span>
+          <span>•</span>
+        </div>
+      )}
+    </div>
+    
+    <div className="ai-info-footer">
+      <p className="disclaimer">
+        <i className="fas fa-info-circle"></i> For medical advice, please consult your doctor
+      </p>
+    </div>
+  </div>
+)}
     </div>
   );
 }

@@ -147,6 +147,79 @@ Based on the above information, provide the top 5 possible diagnoses.`;
     }
 });
 
+
+app.post('/api/patient-insights', authMiddleware, async (req, res) => {
+    if (req.role !== 'patient') return res.status(403).json({ error: 'Forbidden' });
+  
+    try {
+      const { medications, diagnosis, symptoms } = req.body;
+      
+      const prompt = `As a medical assistant, provide concise insights for a patient with:
+- Diagnosis: ${diagnosis || 'Not specified'}
+- Medications: ${medications.map(m => m.name).join(', ') || 'None'}
+- Symptoms: ${symptoms.join(', ') || 'None'}
+
+Provide this information in a clear, spaced format with these sections:
+1. Condition Summary: (1-2 sentences)
+2. Key Points: (3-4 bullet points)
+3. When to Seek Help: (clear signs to watch for)
+4. Wellness Tips: (2-3 suggestions)
+
+Keep response under 250 words total. Use simple language and empathic tone `;
+  
+      const completion = await openai.chat.completions.create({
+        model: 'gpt-4',
+        messages: [
+          { role: 'system', content: 'You are a compassionate medical assistant. Provide clear, accurate information without alarming the patient.' },
+          { role: 'user', content: prompt }
+        ],
+        temperature: 0.7,
+        max_tokens: 350
+      });
+  
+      res.json({ insights: completion.choices[0].message.content });
+    } catch (err) {
+      console.error('AI insights error:', err);
+      res.status(500).json({ error: 'Failed to generate insights' });
+    }
+  });
+  
+  app.post('/api/patient-chat', authMiddleware, async (req, res) => {
+    if (req.role !== 'patient') return res.status(403).json({ error: 'Forbidden' });
+  
+    try {
+      const { message, context } = req.body;
+      
+      const prompt = `Patient asks: "${message}"
+      
+  Their medical context:
+  - Diagnosis: ${context.diagnosis || 'Unknown'}
+  - Medications: ${context.medications.map(m => m.name).join(', ') || 'None'}
+  - Symptoms: ${context.symptoms.join(', ') || 'None'}
+  
+  Provide a helpful response (150-200 words) that:
+  1. Answers the question simply
+  2. References their medical context if relevant
+  3. States clearly if they should contact their doctor
+  4. Uses empathetic, reassuring tone`;
+  
+      const completion = await openai.chat.completions.create({
+        model: 'gpt-4',
+        messages: [
+          { role: 'system', content: 'You are a patient medical assistant. Provide helpful information without diagnosis or treatment advice.' },
+          { role: 'user', content: prompt }
+        ],
+        temperature: 0.7,
+        max_tokens: 250
+      });
+  
+      res.json({ response: completion.choices[0].message.content });
+    } catch (err) {
+      console.error('AI chat error:', err);
+      res.status(500).json({ error: 'Failed to generate response' });
+    }
+  });
+
 // Static files and catch-all route
 app.use(express.static(path.join(__dirname, 'dist')));
 app.get('*', (req, res) => {

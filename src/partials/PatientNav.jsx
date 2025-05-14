@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
-function Nav() {
+function PatientNav() {
     const navigate = useNavigate();
     const [userRole, setUserRole] = useState(null);
+    const [showSettingsMenu, setShowSettingsMenu] = useState(false);
 
     useEffect(() => {
         const role = localStorage.getItem('userRole');
@@ -17,8 +18,8 @@ function Nav() {
         navigate('/login');
     };
 
-    const handlePatientsClick = () => {
-        navigate('/patients');
+    const toggleSettingsMenu = () => {
+        setShowSettingsMenu(!showSettingsMenu);
     };
 
     const styles = {
@@ -50,20 +51,26 @@ function Nav() {
             padding: '10px',
             borderRadius: '5px',
             transition: 'background-color 0.3s',
-            '&:hover': {
-                backgroundColor: '#34495E',
-            }
+            position: 'relative',
         },
-        logoutButton: {
-            marginTop: '20px',
-            padding: '10px 15px',
-            backgroundColor: '#E74C3C',
-            color: 'white',
-            border: 'none',
+        settingsMenu: {
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            backgroundColor: '#34495E',
             borderRadius: '5px',
+            padding: '10px',
+            minWidth: '150px',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+            zIndex: 100,
+        },
+        menuItem: {
+            padding: '8px 12px',
+            borderRadius: '3px',
             cursor: 'pointer',
+            transition: 'background-color 0.2s',
             '&:hover': {
-                backgroundColor: '#C0392B',
+                backgroundColor: '#2C3E50',
             }
         }
     };
@@ -78,22 +85,24 @@ function Nav() {
                 <ul style={styles.sidebarList}>
                     <li 
                         style={styles.sidebarListItem} 
-                        onClick={handlePatientsClick}
+                        onClick={toggleSettingsMenu}
                     >
-                        Patients
+                        Settings
+                        {showSettingsMenu && (
+                            <div style={styles.settingsMenu}>
+                                <div 
+                                    style={styles.menuItem}
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </div>
+                            </div>
+                        )}
                     </li>
-                    <li style={styles.sidebarListItem}>Settings</li>
                 </ul>
-                
-                <button 
-                    onClick={handleLogout}
-                    style={styles.logoutButton}
-                >
-                    Logout
-                </button>
             </div>
         </nav>
     );
 }
 
-export default Nav;
+export default PatientNav;

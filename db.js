@@ -1,13 +1,11 @@
 
 const mongoose = require('mongoose');
+require('dotenv').config(); 
 
 const connectToDb = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/userdata', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
-    console.log('Connected to MongoDB');
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log('Connected to MongoDB Atlas');
     return mongoose.connection;
   } catch (err) {
     console.error('MongoDB connection error:', err);
